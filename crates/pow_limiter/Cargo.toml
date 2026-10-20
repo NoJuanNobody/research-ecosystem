@@ -1,0 +1,6 @@
+[package]
+name = "pow_limiter"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Paper 34: Network-Decentralized Rate Limiting & Anti-Sybil Proof-of-Compute"

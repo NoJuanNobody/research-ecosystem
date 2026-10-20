@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/edge_inference",
+    "crates/kv_cache",
+    "crates/edge_mesh",
+    "crates/sandbox",
+    "crates/swarm_sync",
+    "crates/micro_channel",
+    "crates/pow_limiter",
+    "crates/agent_market",
+    "embedded/guardrails",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Research Ecosystem Contributors"]

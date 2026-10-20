@@ -1,0 +1,16 @@
+{
+  "name": "research-ecosystem",
+  "version": "0.1.0",
+  "private": true,
+  "description": "36 Research Paper Implementations Across Edge Agents, Graph-Loop Creative Pipelines, and Network Economics Distributions",
+  "workspaces": [
+    "packages/motion_engine",
+    "packages/lettering",
+    "packages/web_curator"
+  ],
+  "scripts": {
+    "test": "python3 -m unittest discover -v -s tests",
+    "smoke": "bash scripts/smoke_test_all.sh"
+  },
+  "license": "MIT"
+}

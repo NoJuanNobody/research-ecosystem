@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "research-ecosystem"
+version = "0.1.0"
+description = "36 Research Paper Implementations Across Edge Agents, Graph-Loop Creative Pipelines, and Network Economics Distributions"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Research Ecosystem Contributors"}
+]
+dependencies = []
+
+[project.scripts]
+research-ecosystem = "research_ecosystem.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

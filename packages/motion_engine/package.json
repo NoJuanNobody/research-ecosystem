@@ -1,0 +1,7 @@
+{
+  "name": "@research-ecosystem/motion_engine",
+  "version": "0.1.0",
+  "description": "Paper 13: Deterministic Time-Indexed Frame Synthesis in Headless Render Graphs",
+  "main": "src/index.ts",
+  "license": "MIT"
+}

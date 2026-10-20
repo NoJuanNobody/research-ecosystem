@@ -1,0 +1,6 @@
+[package]
+name = "swarm_sync"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Paper 27: Decentralized Bandwidth Allocation for Edge Diffusion Swarms"

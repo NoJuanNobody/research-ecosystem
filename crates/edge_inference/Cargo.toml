@@ -1,0 +1,6 @@
+[package]
+name = "edge_inference"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Paper 01: Sub-4-Bit Speculative Streaming on Edge Silicon"

@@ -1,0 +1,6 @@
+[package]
+name = "guardrails"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Paper 05: Neuro-Symbolic Micro-Guardrail Verification on Microcontrollers"

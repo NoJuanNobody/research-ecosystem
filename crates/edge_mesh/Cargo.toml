@@ -1,0 +1,6 @@
+[package]
+name = "edge_mesh"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Paper 04: Edge-to-Edge Gossip Consensus in Ephemeral Agent Meshes"

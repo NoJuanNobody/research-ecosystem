@@ -1,0 +1,6 @@
+[package]
+name = "sandbox"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Paper 10: Fault-Tolerant Speculative Agent Tool Sandboxing with Deterministic Rollbacks"

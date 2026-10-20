@@ -1,0 +1,6 @@
+[package]
+name = "agent_market"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Paper 36: Nash Equilibrium in Autonomous Agent Labor Markets"

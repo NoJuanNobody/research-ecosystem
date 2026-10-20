@@ -1,0 +1,6 @@
+[package]
+name = "micro_channel"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Paper 28: Agent-to-Agent Micro-Streaming Payment Channels via Layer-2 State Channels"

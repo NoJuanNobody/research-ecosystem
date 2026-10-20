@@ -1,12 +1,18 @@
+# Rust build artifacts
+target/
+
+# Python build/cache artifacts
 __pycache__/
 *.py[cod]
 *$py.class
 *.egg-info/
-.pytest_cache/
-dist/
 build/
-target/
+dist/
+.pytest_cache/
+
+# Node / TypeScript
 node_modules/
+
+# OS
+.DS_Store
 .env
-.worktrees/
-*.db
