@@ -12,8 +12,10 @@ from .catalog import (
     run_scenario,
     verify_all_systems,
 )
+from .latex_publisher import LatexManuscriptBundle, LatexManuscriptCompiler
+from .research_graph_loop import AutonomousResearchGraphLoop, ResearchGraphNode
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __all__ = [
     "PAPERS_CATALOG",
     "get_paper",
@@ -22,4 +24,8 @@ __all__ = [
     "run_pillar",
     "run_scenario",
     "verify_all_systems",
+    "LatexManuscriptBundle",
+    "LatexManuscriptCompiler",
+    "ResearchGraphNode",
+    "AutonomousResearchGraphLoop",
 ]

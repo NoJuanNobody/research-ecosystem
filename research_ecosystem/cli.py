@@ -17,6 +17,8 @@ from .catalog import (
     run_scenario,
     verify_all_systems,
 )
+from .latex_publisher import LatexManuscriptCompiler
+from .research_graph_loop import AutonomousResearchGraphLoop
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -44,6 +46,27 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_ver = sub.add_parser("verify-all", help="Verify all 36 papers and 3 cross-pillar integration scenarios")
     p_ver.add_argument("--json", action="store_true", help="Output as JSON")
+
+    p_latex = sub.add_parser("latex", help="Compile a paper (01..36) into a publication-ready LaTeX + BibTeX manuscript bundle")
+    p_latex.add_argument("paper_id", help="Paper ID (01..36)")
+    p_latex.add_argument("--out-dir", default="./papers_latex", help="Output directory for LaTeX bundle")
+
+    p_loop = sub.add_parser(
+        "graph-loop",
+        help="Run the 5-stage Autonomous Research Graph Loop (Lab Scanner -> Council Discussion -> FAU HPC/Homelab Experiment -> Critique Gate -> LaTeX Publication)",
+    )
+    p_loop.add_argument(
+        "--topic",
+        default="Speculative GraphRAG Distillation & Sub-4-Bit Edge Verification",
+        help="Seed research topic to investigate",
+    )
+    p_loop.add_argument(
+        "--compute-target",
+        choices=["fau_hpc", "homelab", "edge_local"],
+        default="fau_hpc",
+        help="Target compute fabric (fau_hpc SLURM cluster, homelab silo, or edge_local)",
+    )
+    p_loop.add_argument("--out-dir", default="./papers_latex", help="Output directory for SLURM script and LaTeX paper")
 
     return parser
 
@@ -113,6 +136,18 @@ def main(argv: Optional[List[str]] = None) -> int:
             if summary["all_passed"]:
                 print("=== ALL 36 RESEARCH SYSTEMS VERIFIED SUCCESSFULLY ===")
         return 0 if summary["all_passed"] else 1
+
+    if args.command == "latex":
+        compiler = LatexManuscriptCompiler()
+        bundle = compiler.compile_paper(args.paper_id, out_root=args.out_dir)
+        print(json.dumps(bundle.to_dict(), indent=2))
+        return 0
+
+    if args.command == "graph-loop":
+        loop = AutonomousResearchGraphLoop(out_dir=args.out_dir)
+        result = loop.run_cycle(seed_topic=args.topic, compute_target=args.compute_target)
+        print(json.dumps(result, indent=2))
+        return 0
 
     return 1
 

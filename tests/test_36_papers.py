@@ -372,6 +372,41 @@ class TestCrossPillarScenariosAndMonorepo(unittest.TestCase):
         ver = json.loads(buf.getvalue())
         self.assertTrue(ver["all_passed"])
 
+    def test_latex_compiler_and_autonomous_research_graph_loop(self) -> None:
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            buf = io.StringIO()
+            with redirect_stdout(buf):
+                rc_tex = cli_main(["latex", "01", "--out-dir", tmpdir])
+            self.assertEqual(rc_tex, 0)
+            tex_bundle = json.loads(buf.getvalue())
+            self.assertTrue(Path(tex_bundle["tex_path"]).is_file())
+            self.assertTrue(Path(tex_bundle["bib_path"]).is_file())
+            tex_source = Path(tex_bundle["tex_path"]).read_text(encoding="utf-8")
+            self.assertIn(r"\documentclass[10pt,twocolumn]{article}", tex_source)
+            self.assertIn("Sub-4-Bit Speculative Streaming", tex_source)
+
+            buf_loop = io.StringIO()
+            with redirect_stdout(buf_loop):
+                rc_loop = cli_main(
+                    [
+                        "graph-loop",
+                        "--topic",
+                        "FAU HPC Hybrid Speculative Distillation",
+                        "--compute-target",
+                        "fau_hpc",
+                        "--out-dir",
+                        tmpdir,
+                    ]
+                )
+            self.assertEqual(rc_loop, 0)
+            loop_res = json.loads(buf_loop.getvalue())
+            self.assertEqual(loop_res["status"], "PUBLISHED")
+            self.assertTrue(Path(loop_res["fau_slurm_script"]).is_file())
+            self.assertTrue(Path(loop_res["latex_bundle"]["tex_path"]).is_file())
+            self.assertGreaterEqual(len(loop_res["graph_nodes"]), 5)
+
 
 if __name__ == "__main__":
     unittest.main()
