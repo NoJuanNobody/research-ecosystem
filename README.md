@@ -1,10 +1,26 @@
 # Research Ecosystem: 36 Research Paper Implementations Across Edge Agents, Graph-Loop Creative Pipelines, and Network Economics Distributions
 
+> **What it is:** a research sketchbook for readers and researchers: a catalog of 36 paper ideas, a small Python CLI that runs a toy model for each idea, and a LaTeX template that turns any idea into a draft manuscript. It is a prototype, not finished research: each "PASS" is a toy example on fixed inputs, and the graph loop's numbers are simulated.
+
+[![Explainer video poster](docs/explainer/poster.png)](https://nojuannobody.github.io/research-ecosystem/explainer/explainer.mp4)
+
+[▶ Watch the 60-second explainer](https://nojuannobody.github.io/research-ecosystem/explainer/explainer.mp4) · [Read the one-page explainer](https://nojuannobody.github.io/research-ecosystem/explainer/)
+
+**How it works for you**
+
+1. Install: `pip install -e .` adds the `research-ecosystem` command (no API keys, no extra packages).
+2. Browse: `research-ecosystem list --pillar 2` prints the ideas with their runtime and target.
+3. Inspect one: `research-ecosystem inspect 15` shows its files and runs its toy model (PASS/FAIL plus metrics).
+4. Check everything: `research-ecosystem verify-all` runs all 36 toy models and the 3 cross-pillar scenarios.
+5. Draft a paper: `research-ecosystem latex 15` writes `main.tex`, `references.bib` and `compile_pdf.sh`; replace the template text and toy metrics with real work before citing it.
+6. Optional: `research-ecosystem graph-loop --topic "..."` simulates a 5-stage research cycle and writes a SLURM script (it does not submit it).
+
+
 [![Papers Implemented](https://img.shields.io/badge/Research_Papers-36%2F36_Verified-brightgreen)](#complete-36-paper-implementation-matrix)
 [![Pillars](https://img.shields.io/badge/Pillars-Edge_%7C_Creative_%7C_Economics-blue)](#architecture-the-edge-graph-network-triad)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Production-grade engineering implementation and agent skill repository for the **36 Research Paper Implementations** specified in [`HANDOFF_36_PAPERS.md`](HANDOFF_36_PAPERS.md).
+Prototype reference implementation (pure-Python toy models plus short Rust/TypeScript/Solidity/C sketches) and agent skill repository for the **36 Research Paper Implementations** specified in [`HANDOFF_36_PAPERS.md`](HANDOFF_36_PAPERS.md).
 
 ## Quick Install (Skills CLI)
 
