@@ -47,8 +47,8 @@ def build_parser() -> argparse.ArgumentParser:
     p_ver = sub.add_parser("verify-all", help="Verify all 36 papers and 3 cross-pillar integration scenarios")
     p_ver.add_argument("--json", action="store_true", help="Output as JSON")
 
-    p_latex = sub.add_parser("latex", help="Compile a paper (01..36) into a publication-ready LaTeX + BibTeX manuscript bundle")
-    p_latex.add_argument("paper_id", help="Paper ID (01..36)")
+    p_latex = sub.add_parser("latex", help="Compile a paper (01..36 or 'all') into a publication-ready LaTeX + BibTeX manuscript bundle")
+    p_latex.add_argument("paper_id", help="Paper ID (01..36) or 'all'")
     p_latex.add_argument("--out-dir", default="./papers_latex", help="Output directory for LaTeX bundle")
 
     p_loop = sub.add_parser(
@@ -66,6 +66,7 @@ def build_parser() -> argparse.ArgumentParser:
         default="fau_hpc",
         help="Target compute fabric (fau_hpc SLURM cluster, homelab silo, or edge_local)",
     )
+    p_loop.add_argument("--paper-id", default="37", help="Paper ID to assign to newly synthesized research paper")
     p_loop.add_argument("--out-dir", default="./papers_latex", help="Output directory for SLURM script and LaTeX paper")
 
     return parser
@@ -139,13 +140,24 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     if args.command == "latex":
         compiler = LatexManuscriptCompiler()
+        if str(args.paper_id).lower() == "all":
+            bundles = [
+                compiler.compile_paper(f"{i:02d}", out_root=args.out_dir).to_dict()
+                for i in range(1, 37)
+            ]
+            print(json.dumps({"compiled_count": len(bundles), "bundles": bundles}, indent=2))
+            return 0
         bundle = compiler.compile_paper(args.paper_id, out_root=args.out_dir)
         print(json.dumps(bundle.to_dict(), indent=2))
         return 0
 
     if args.command == "graph-loop":
         loop = AutonomousResearchGraphLoop(out_dir=args.out_dir)
-        result = loop.run_cycle(seed_topic=args.topic, compute_target=args.compute_target)
+        result = loop.run_cycle(
+            seed_topic=args.topic,
+            compute_target=args.compute_target,
+            paper_id=args.paper_id,
+        )
         print(json.dumps(result, indent=2))
         return 0
 

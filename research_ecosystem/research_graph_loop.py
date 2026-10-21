@@ -131,6 +131,7 @@ echo "[FAU-HPC] Completed empirical benchmark sweep."
         seed_topic: str = "Speculative GraphRAG Distillation & Sub-4-Bit Edge Verification",
         compute_target: str = "fau_hpc",
         max_refinement_loops: int = 2,
+        paper_id: str = "37",
     ) -> Dict[str, Any]:
         """Execute a complete 5-node Autonomous Research Graph Loop cycle."""
         # Node 1: Scan Frontier AI Labs & arXiv
@@ -175,7 +176,7 @@ echo "[FAU-HPC] Completed empirical benchmark sweep."
                         "and zero state-rollback leaks."
                     ),
                 },
-                "proposed_paper_id": "37",
+                "proposed_paper_id": str(paper_id),
                 "proposed_title": f"Autonomous Graph-Loop Synthesis: {seed_topic}",
                 "hypothesis": (
                     f"Coupling FAU Research Computing GPU distillation with Homelab GraphRAG indexing and "
@@ -196,7 +197,7 @@ echo "[FAU-HPC] Completed empirical benchmark sweep."
 
             # Node 3: Hybrid Compute Dispatcher (FAU Research Computing + Homelab + Edge)
             slurm_script_path = self.generate_fau_slurm_script(
-                paper_id="37",
+                paper_id=str(paper_id),
                 topic=discussion_payload["proposed_title"],
             )
             baseline_tok_s = 58.0
@@ -250,7 +251,7 @@ echo "[FAU-HPC] Completed empirical benchmark sweep."
 
         # Node 5: Compile Publication-Ready LaTeX Manuscript
         custom_spec = {
-            "id": "37",
+            "id": str(paper_id),
             "pillar": "I+II+III",
             "pillar_name": "Autonomous Research Graph-Loop (FAU HPC + Homelab + Edge)",
             "title": final_discussion["proposed_title"],
@@ -266,7 +267,7 @@ echo "[FAU-HPC] Completed empirical benchmark sweep."
             "empirical_metrics": final_metrics,
         }
         bundle: LatexManuscriptBundle = self.compiler.compile_paper(
-            paper_id="37",
+            paper_id=str(paper_id),
             out_root=self.out_dir,
             custom_spec=custom_spec,
         )

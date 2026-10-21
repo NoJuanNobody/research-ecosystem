@@ -10,12 +10,12 @@
 
 # ============================================================================
 # FAU Research Computing (HPC SLURM + Workstation) Experiment Dispatcher
-# Topic: Autonomous Graph-Loop Synthesis: Hybrid FAU-HPC Speculative Distillation & Edge GraphRAG
+# Topic: Autonomous Graph-Loop Synthesis: Speculative GraphRAG Distillation & Sub-4-Bit Edge Verification
 # ============================================================================
 set -euo pipefail
 mkdir -p logs
 
-echo "[FAU-HPC] Starting experiment for Paper 37: Autonomous Graph-Loop Synthesis: Hybrid FAU-HPC Speculative Distillation & Edge GraphRAG"
+echo "[FAU-HPC] Starting experiment for Paper 37: Autonomous Graph-Loop Synthesis: Speculative GraphRAG Distillation & Sub-4-Bit Edge Verification"
 echo "[FAU-HPC] Host: $(hostname) | GPUs: 2 | CPUs: 16 | Mem: 64G"
 
 python3 -m research_ecosystem.cli verify-all --json > logs/empirical_results_37.json
